@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 namespace Identity.Controllers
 {
+    [Authorize]
     public class AppRolesController : Controller
     {
+        
         private readonly RoleManager<IdentityRole> rolemanager;
 
         public AppRolesController(RoleManager<IdentityRole> rolemanager)
@@ -23,7 +25,7 @@ namespace Identity.Controllers
         {
             return View();
         }
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Create(IdentityRole model)
         {
             if(!rolemanager.RoleExistsAsync(model.Name).GetAwaiter().GetResult())
